@@ -23,4 +23,5 @@ return [
     'type'           => '',
     // 是否自动开启 SESSION
     'auto_start'     => true,
+    'path' => './runtime/session/'
 ];

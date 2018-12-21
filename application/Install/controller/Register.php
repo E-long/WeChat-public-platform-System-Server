@@ -4,7 +4,6 @@ namespace app\install\controller;
 
 use think\Controller;
 use think\Request;
-use app\install\model\User;
 use think\facade\Session;
 
 
@@ -25,7 +24,8 @@ class Register extends Controller
         if($count==0){
 
 
-            $result = $this->validate($request_data, 'app\install\validate\register');
+            $result = $this->validate($request_data, 'app\Install\validate\Register');
+     
             if(true !== $result){
                 $arr['msg']=$result;
             }else{
@@ -51,7 +51,7 @@ class Register extends Controller
 
                     
                     $arr=[
-                        'code'=>1,
+                        'code'=>200,
                         'msg'=>'注册成功',
                         'url'=>'/admin/home',
                         'data'=>$user
