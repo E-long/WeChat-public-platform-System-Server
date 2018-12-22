@@ -28,11 +28,11 @@ class Auth extends Controller
         $result = $this->validate($request_data, 'app\admin\validate\Login');
 
         if($result !== true){
-            $return_data=[
+            $arr=[
                 'code'=>0,
                 'msg'=>$result
             ];
-            return json($return_data);
+            return json($arr);
         }
 
 
@@ -40,19 +40,19 @@ class Auth extends Controller
 
         if($user==null){
 
-            $return_data=[
+            $arr=[
                 'code'=>0,
                 'msg'=>'找不到该用户'
             ];
-            return json($return_data); 
+            return json($arr); 
         }
 
         if (!password_verify($request_data['password'], $user['password'])) {
-            $return_data=[
+            $arr=[
                 'code'=>0,
                 'msg'=>'登录密码错误'
             ];
-            return json($return_data); 
+            return json($arr); 
         }
         $user=db('users')->where('user',$request_data['user'])->update(['last_login_time'=>date("Y-m-d H:i:s")]);
         $user=db('users')->where('user',$request_data['user'])->find();
@@ -65,15 +65,12 @@ class Auth extends Controller
         if($user['avatar']!=null){
             $user['avatar']='http://api.long.com/uploads/'.$user['avatar'];
         }else{
-            $user['avatar']='http://api.long.com/uploads/default.jpg';
-        }
-
-
-
+            $user['avatar']='http://api.long.com/uploads/avatar/default.jpg';
+        };
         $seesonInfo=db('users')->where('user',$request_data['user'])->field('user,real_name,user_type')->find();
         Session::set('user',$seesonInfo);
 
-        $return_data=[
+        $arr=[
             'code'=>1,
             'msg'=>'登录成功',
             'url'=>'/admin/home',
@@ -81,11 +78,17 @@ class Auth extends Controller
 
         ];
 
-        
-
-        return json($return_data); 
-
-
+        return json($arr); 
        
+    }
+
+    public function logout(){
+        $back=Session::delete('user');
+        $arr=[
+            'code'=>200,
+            'msg'=>'退出成功',
+            'url'=>'./'
+        ];
+        return json($arr);
     }
 }

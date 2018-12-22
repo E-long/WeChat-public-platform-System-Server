@@ -36,7 +36,6 @@ class Register extends Controller
                     'user_type'=>1,
                     'last_login_ip'=>$request->ip(),
                     'last_login_time'=>date("Y-m-d H:i:s"),
-                    'updated_at'=>date("Y-m-d H:i:s"),
 
                 ];
 
@@ -48,6 +47,13 @@ class Register extends Controller
                     $power=db('user_type')->where('user_type',$data['user_type'])->find();
                     $user['power']=$power['power'];
                     unset($user['password']);
+
+
+                    if($user['avatar']!=null){
+                        $user['avatar']='http://api.long.com/uploads/'.$user['avatar'];
+                    }else{
+                        $user['avatar']='http://api.long.com/uploads/avatar/default.jpg';
+                    }
 
                     
                     $arr=[
