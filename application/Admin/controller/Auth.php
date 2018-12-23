@@ -56,18 +56,18 @@ class Auth extends Controller
         }
         $user=db('users')->where('user',$request_data['user'])->update(['last_login_time'=>date("Y-m-d H:i:s")]);
         $user=db('users')->where('user',$request_data['user'])->find();
-        $user_type=db('user_type')->where('user_type',$user['user_type'])->find();
+        $user_type=db('user_type')->where('user_level',$user['user_level'])->find();
         $user['power']=$user_type['power'];
         unset($user['password']);
-        unset($user['user_type']);
-        $user['user_type']=$user_type['name'];
+        unset($user['user_level']);
+        $user['user_level']=$user_type['name'];
         
         if($user['avatar']!=null){
             $user['avatar']='http://api.long.com/uploads/'.$user['avatar'];
         }else{
             $user['avatar']='http://api.long.com/uploads/avatar/default.jpg';
         };
-        $seesonInfo=db('users')->where('user',$request_data['user'])->field('user,real_name,user_type')->find();
+        $seesonInfo=db('users')->where('user',$request_data['user'])->field('user,real_name,user_level')->find();
         Session::set('user',$seesonInfo);
 
         $arr=[

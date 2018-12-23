@@ -9,7 +9,7 @@ class UserType extends Migrator
         {
             // create the table
             $table = $this->table('user_type');
-            $table->addColumn('user_type', 'string',['comment'=>'用户类型'])
+            $table->addColumn('user_level', 'string',['comment'=>'用户级别'])
                 ->addColumn('name', 'string',['comment'=>'类型名称'])
                 ->addColumn('power', 'string',['comment'=>'类型权限'])
                 ->addTimestamps()

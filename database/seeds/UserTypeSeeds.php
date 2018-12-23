@@ -16,7 +16,7 @@ class UserTypeSeeds extends Seeder
     {
 
         $data=[
-            'user_type'=>1,
+            'user_level'=>0,
             'name'=>'超级管理员',
             'power'=>'{}'
         ];

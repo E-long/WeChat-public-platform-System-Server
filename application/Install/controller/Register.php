@@ -29,11 +29,10 @@ class Register extends Controller
             if(true !== $result){
                 $arr['msg']=$result;
             }else{
-                $request_data['user_type']=1;
                 $data=[
                     'user'=>$request_data['user'],
                     'password'=>password_hash($request_data['password'], PASSWORD_DEFAULT),
-                    'user_type'=>1,
+                    'user_level'=>1,
                     'last_login_ip'=>$request->ip(),
                     'last_login_time'=>date("Y-m-d H:i:s"),
 
@@ -44,7 +43,7 @@ class Register extends Controller
 
 
                     $user=db('users')->where('user',$request_data['user'])->find();
-                    $power=db('user_type')->where('user_type',$data['user_type'])->find();
+                    $power=db('user_type')->where('user_type',$data['user_level'])->find();
                     $user['power']=$power['power'];
                     unset($user['password']);
 
