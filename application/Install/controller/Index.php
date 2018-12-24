@@ -16,7 +16,7 @@ class Index extends Controller
         ];
         if($count==0){
             $arr=[
-                'code'=>100, 'msg'=>'系统未初始化','url'=>'install'
+                'code'=>100, 'msg'=>'系统未初始化','url'=>'/install'
             ];
         }
             

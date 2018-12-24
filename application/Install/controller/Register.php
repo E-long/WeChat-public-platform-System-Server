@@ -43,7 +43,7 @@ class Register extends Controller
 
 
                     $user=db('users')->where('user',$request_data['user'])->find();
-                    $power=db('user_type')->where('user_type',$data['user_level'])->find();
+                    $power=db('user_type')->where('user_level',$data['user_level'])->find();
                     $user['power']=$power['power'];
                     unset($user['password']);
 
@@ -63,7 +63,7 @@ class Register extends Controller
                     ];
 
 
-                    $seesonInfo=db('users')->where('user',$request_data['user'])->field('user,real_name,user_type')->find();
+                    $seesonInfo=db('users')->where('user',$request_data['user'])->field('user,real_name,user_level')->find();
 
                     Session::set('user',$seesonInfo);
 

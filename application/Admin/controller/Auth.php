@@ -68,6 +68,7 @@ class Auth extends Controller
             $user['avatar']='http://api.long.com/uploads/avatar/default.jpg';
         };
         $seesonInfo=db('users')->where('user',$request_data['user'])->field('user,real_name,user_level')->find();
+        $seesonInfo['power']=$user['power'];
         Session::set('user',$seesonInfo);
 
         $arr=[

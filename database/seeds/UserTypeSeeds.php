@@ -18,7 +18,7 @@ class UserTypeSeeds extends Seeder
         $data=[
             'user_level'=>0,
             'name'=>'超级管理员',
-            'power'=>'{}'
+            'power'=>'super'
         ];
         db('user_type')->insert($data);
     }
